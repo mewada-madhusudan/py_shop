@@ -1,0 +1,66 @@
+CHITALE MANAGEMENT SYSTEM
+
+# Schema
+Tokens(TokenID,
+       -------
+       Assigned?,
+       InvoiceID);              # relationship 'In' in this schema itself
+
+Products(ProductID,
+         ---------
+         Name,
+         Description,
+         UnitPrice,
+         UnitType,
+         SGST,
+         CGST,
+         CurrentDiscount);
+
+Invoices(Invoice_ID,
+         ----------
+         InvoiceDate,
+         InvoiceTotal,
+         DiscountGiven,
+         PaymentMode);
+
+Inventory(ProductID,            # relationship 'Has' in this schema itself
+          ---------
+          StoredQuantity,
+          DisplayedQuantity,
+          StoreThreshold);
+
+InventoryTransactions(TransactionID,
+                      -------------
+                      TransactionType,
+                      ProductID, # relationship 'Of' in this schema itself
+                      Quantity   # descriptive attribute
+                      Timestamp);
+
+Orders(OrderID,
+       -------
+       OrderDate,
+       Delivered?,
+       Cancelled?);
+
+OrdersOfProducts(OrderID,       # many-to-many relationship
+                 -------
+                 ProductID,
+                 ---------
+                 Quantity);
+
+TokensSelectProducts(TokenID,   # many-to-many relationship
+                     -------
+                     ProductID,
+                     ---------
+                     Quantity);
+
+ProductsInInvoices(InvoiceID, # many-to-many relationship
+                   ---------
+                   ProductID,
+                   ---------
+                   Name,
+                   Quantity,
+                   UnitPrice,
+                   SGST,
+                   CGST,
+                   Discount);

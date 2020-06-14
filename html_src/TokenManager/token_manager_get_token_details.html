@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Token details</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../styles.css">
+  </head>
+  <body>
+    <h2>Token details are</h2><br><br>
+    <table cellspacing="5" cellpadding="5">
+      <thead>
+        <th>Product ID</th>
+        <th>Quantity</th>
+      </thead>
+      <tbody>
+        {% for row in token_details %}
+        <tr>
+          {% for detail in row %}
+          <td>
+            {{ detail }}
+          </td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <br><br>
+    <a href="/TokenManager" class="button">Back</a>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Invoice details</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../styles.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"> </script>
+    <script type=text/javascript> $(function() { $("#mybutton").click(function (event) { $.getJSON('/BillDesk/PrintInvoiceCopy', { },
+    function(data) { }); return false; }); }); </script>
+    <style>
+      h3 {display:inline}
+      pre {tab-size: 8}
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <pre><h3>Invoice ID   :</h3> {{ invoice_id }}    <h3>Timestamp :</h3> {{ timestamp }}<br><br></pre>
+    <pre><h3>Payment mode :</h3> {{ payment_mode }}<br><br></pre>
+
+    <!-- Body -->
+    <table>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Rate</th>
+          <th>SGST</th>
+          <th>CGST</th>
+          <th>Total Amount(Inc. GST)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in invoice %}
+        <tr>
+          {% for d in row %}
+          <td>{{ d }}</td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table><br>
+    <!-- Tailer -->
+    <pre><span class="tab_big"></span><h3>Total SGST     :</h3> {{ sgst_total }}<br></pre>
+    <pre><span class="tab_big"></span><h3>Total CGST     :</h3> {{ cgst_total }}<br></pre>
+    <pre><span class="tab_big"></span><h3>Total GST      :</h3> {{ sgst_total + cgst_total }}<br></pre>
+    <pre><span class="tab_big"></span><h3>Bill Amount    :</h3> {{ invoice_total }}<br></pre>
+    <pre><span class="tab_big"></span><h3>Discount given :</h3> {{ discount_given }}<br></pre>
+    <pre><span class="tab_big"></span><h3>Bill Amount    :</h3> {{ invoice_total - discount_given }}<br></pre>
+    <br>
+    <a href='/BillDesk' class="button">Back</a>
+    <a class="button" href="/BillDesk/PrintInvoiceCopy">Print</a>
+  </body>
+</html>
